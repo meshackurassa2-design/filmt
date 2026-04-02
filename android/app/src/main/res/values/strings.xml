@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Filamu Times</string>
+    <string name="title_activity_main">Filamu Times</string>
+    <string name="package_name">com.filamutimes.app</string>
+    <string name="custom_url_scheme">com.filamutimes.app</string>
+</resources>

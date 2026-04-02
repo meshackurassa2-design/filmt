@@ -1,0 +1,500 @@
+﻿rations.DefaultBuildOperati
+onExecutor.call(DefaultBuil
+dOperationExecutor.java:73)
+	at org.gradle.launcher.exe
+c.RunAsBuildOperationBuildA
+ctionExecutor.execute(RunAs
+BuildOperationBuildActionEx
+ecutor.java:57)
+	at org.gradle.launcher.exe
+c.RunAsWorkerThreadBuildAct
+ionExecutor.lambda$execute$
+0(RunAsWorkerThreadBuildAct
+ionExecutor.java:36)
+	at org.gradle.internal.wor
+k.DefaultWorkerLeaseService
+.withLocks(DefaultWorkerLea
+seService.java:264)
+	at org.gradle.internal.wor
+k.DefaultWorkerLeaseService
+.runAsWorkerThread(DefaultW
+orkerLeaseService.java:128)
+	at org.gradle.launcher.exe
+c.RunAsWorkerThreadBuildAct
+ionExecutor.execute(RunAsWo
+rkerThreadBuildActionExecut
+or.java:36)
+	at org.gradle.tooling.inte
+rnal.provider.continuous.Co
+ntinuousBuildActionExecutor
+.execute(ContinuousBuildAct
+ionExecutor.java:110)
+	at org.gradle.tooling.inte
+rnal.provider.SubscribableB
+uildActionExecutor.execute(
+SubscribableBuildActionExec
+utor.java:64)
+	at org.gradle.internal.ses
+sion.DefaultBuildSessionCon
+text.execute(DefaultBuildSe
+ssionContext.java:46)
+	at org.gradle.tooling.inte
+rnal.provider.BuildSessionL
+ifecycleBuildActionExecuter
+$ActionImpl.apply(BuildSess
+ionLifecycleBuildActionExec
+uter.java:92)
+	at org.gradle.tooling.inte
+rnal.provider.BuildSessionL
+ifecycleBuildActionExecuter
+$ActionImpl.apply(BuildSess
+ionLifecycleBuildActionExec
+uter.java:80)
+	at org.gradle.internal.ses
+sion.BuildSessionState.run(
+BuildSessionState.java:71)
+	at org.gradle.tooling.inte
+rnal.provider.BuildSessionL
+ifecycleBuildActionExecuter
+.execute(BuildSessionLifecy
+cleBuildActionExecuter.java
+:62)
+	at org.gradle.tooling.inte
+rnal.provider.BuildSessionL
+ifecycleBuildActionExecuter
+.execute(BuildSessionLifecy
+cleBuildActionExecuter.java
+:41)
+	at org.gradle.tooling.inte
+rnal.provider.StartParamsVa
+lidatingActionExecuter.exec
+ute(StartParamsValidatingAc
+tionExecuter.java:64)
+	at org.gradle.tooling.inte
+rnal.provider.StartParamsVa
+lidatingActionExecuter.exec
+ute(StartParamsValidatingAc
+tionExecuter.java:32)
+	at org.gradle.tooling.inte
+rnal.provider.SessionFailur
+eReportingActionExecuter.ex
+ecute(SessionFailureReporti
+ngActionExecuter.java:51)
+	at org.gradle.tooling.inte
+rnal.provider.SessionFailur
+eReportingActionExecuter.ex
+ecute(SessionFailureReporti
+ngActionExecuter.java:39)
+	at org.gradle.tooling.inte
+rnal.provider.SetupLoggingA
+ctionExecuter.execute(Setup
+LoggingActionExecuter.java:
+47)
+	at org.gradle.tooling.inte
+rnal.provider.SetupLoggingA
+ctionExecuter.execute(Setup
+LoggingActionExecuter.java:
+31)
+	at org.gradle.launcher.dae
+mon.server.exec.ExecuteBuil
+d.doBuild(ExecuteBuild.java
+:65)
+	at org.gradle.launcher.dae
+mon.server.exec.BuildComman
+dOnly.execute(BuildCommandO
+nly.java:37)
+	at org.gradle.launcher.dae
+mon.server.api.DaemonComman
+dExecution.proceed(DaemonCo
+mmandExecution.java:104)
+	at org.gradle.launcher.dae
+mon.server.exec.WatchForDis
+connection.execute(WatchFor
+Disconnection.java:39)
+	at org.gradle.launcher.dae
+mon.server.api.DaemonComman
+dExecution.proceed(DaemonCo
+mmandExecution.java:104)
+	at org.gradle.launcher.dae
+mon.server.exec.ResetDeprec
+ationLogger.execute(ResetDe
+precationLogger.java:29)
+	at org.gradle.launcher.dae
+mon.server.api.DaemonComman
+dExecution.proceed(DaemonCo
+mmandExecution.java:104)
+	at org.gradle.launcher.dae
+mon.server.exec.RequestStop
+IfSingleUsedDaemon.execute(
+RequestStopIfSingleUsedDaem
+on.java:35)
+	at org.gradle.launcher.dae
+mon.server.api.DaemonComman
+dExecution.proceed(DaemonCo
+mmandExecution.java:104)
+	at org.gradle.launcher.dae
+mon.server.exec.ForwardClie
+ntInput$2.create(ForwardCli
+entInput.java:78)
+	at org.gradle.launcher.dae
+mon.server.exec.ForwardClie
+ntInput$2.create(ForwardCli
+entInput.java:75)
+	at org.gradle.util.interna
+l.Swapper.swap(Swapper.java
+:38)
+	at org.gradle.launcher.dae
+mon.server.exec.ForwardClie
+ntInput.execute(ForwardClie
+ntInput.java:75)
+	at org.gradle.launcher.dae
+mon.server.api.DaemonComman
+dExecution.proceed(DaemonCo
+mmandExecution.java:104)
+	at org.gradle.launcher.dae
+mon.server.exec.LogAndCheck
+Health.execute(LogAndCheckH
+ealth.java:53)
+	at org.gradle.launcher.dae
+mon.server.api.DaemonComman
+dExecution.proceed(DaemonCo
+mmandExecution.java:104)
+	at org.gradle.launcher.dae
+mon.server.exec.LogToClient
+.doBuild(LogToClient.java:6
+3)
+	at org.gradle.launcher.dae
+mon.server.exec.BuildComman
+dOnly.execute(BuildCommandO
+nly.java:37)
+	at org.gradle.launcher.dae
+mon.server.api.DaemonComman
+dExecution.proceed(DaemonCo
+mmandExecution.java:104)
+	at org.gradle.launcher.dae
+mon.server.exec.EstablishBu
+ildEnvironment.doBuild(Esta
+blishBuildEnvironment.java:
+84)
+	at org.gradle.launcher.dae
+mon.server.exec.BuildComman
+dOnly.execute(BuildCommandO
+nly.java:37)
+	at org.gradle.launcher.dae
+mon.server.api.DaemonComman
+dExecution.proceed(DaemonCo
+mmandExecution.java:104)
+	at org.gradle.launcher.dae
+mon.server.exec.StartBuildO
+rRespondWithBusy$1.run(Star
+tBuildOrRespondWithBusy.jav
+a:52)
+	at org.gradle.launcher.dae
+mon.server.DaemonStateCoord
+inator$1.run(DaemonStateCoo
+rdinator.java:297)
+	at org.gradle.internal.con
+current.ExecutorPolicy$Catc
+hAndRecordFailures.onExecut
+e(ExecutorPolicy.java:64)
+	at org.gradle.internal.con
+current.AbstractManagedExec
+utor$1.run(AbstractManagedE
+xecutor.java:47)
+Caused by: org.gradle.api.i
+nternal.tasks.TaskDependenc
+yResolveException: Could 
+not determine the 
+dependencies of null.
+	at org.gradle.api.internal
+.tasks.CachingTaskDependenc
+yResolveContext.getDependen
+cies(CachingTaskDependencyR
+esolveContext.java:68)
+	at org.gradle.api.internal
+.tasks.AbstractTaskDependen
+cy.getDependenciesForIntern
+alUse(AbstractTaskDependenc
+y.java:74)
+	at org.gradle.api.internal
+.tasks.TaskDependencyUtil.g
+etDependenciesForInternalUs
+e(TaskDependencyUtil.java:4
+0)
+	at org.gradle.api.internal
+.tasks.TaskDependencyUtil.g
+etDependenciesForInternalUs
+e(TaskDependencyUtil.java:4
+5)
+	at org.gradle.api.internal
+.provider.BuildableBackedPr
+ovider.buildableDependencie
+s(BuildableBackedProvider.j
+ava:73)
+	at org.gradle.api.internal
+.provider.BuildableBackedPr
+ovider.access$000(Buildable
+BackedProvider.java:28)
+	at org.gradle.api.internal
+.provider.BuildableBackedPr
+ovider$1.visitProducerTasks
+(BuildableBackedProvider.ja
+va:53)
+	at org.gradle.api.internal
+.file.collections.ProviderB
+ackedFileCollection.visitDe
+pendencies(ProviderBackedFi
+leCollection.java:53)
+	at org.gradle.api.internal
+.tasks.CachingTaskDependenc
+yResolveContext$TaskGraphIm
+pl.getNodeValues(CachingTas
+kDependencyResolveContext.j
+ava:103)
+	at org.gradle.internal.gra
+ph.CachingDirectedGraphWalk
+er$GraphWithEmptyEdges.getN
+odeValues(CachingDirectedGr
+aphWalker.java:213)
+	at org.gradle.internal.gra
+ph.CachingDirectedGraphWalk
+er.doSearch(CachingDirected
+GraphWalker.java:121)
+	at org.gradle.internal.gra
+ph.CachingDirectedGraphWalk
+er.findValues(CachingDirect
+edGraphWalker.java:73)
+	at org.gradle.api.internal
+.tasks.CachingTaskDependenc
+yResolveContext.getDependen
+cies(CachingTaskDependencyR
+esolveContext.java:66)
+	... 143 more
+Caused by: org.gradle.api.U
+ncheckedIOException: 
+java.io.IOException: The 
+filename, directory name, 
+or volume label syntax is 
+incorrect
+	at org.gradle.internal.Unc
+heckedException.throwAsUnch
+eckedException(UncheckedExc
+eption.java:62)
+	at org.gradle.internal.Unc
+heckedException.throwAsUnch
+eckedException(UncheckedExc
+eption.java:41)
+	at org.gradle.api.internal
+.provider.DefaultProvider.c
+alculateOwnValue(DefaultPro
+vider.java:74)
+	at org.gradle.api.internal
+.provider.AbstractMinimalPr
+ovider.calculateValue(Abstr
+actMinimalProvider.java:115
+)
+	at org.gradle.api.internal
+.provider.FlatMapProvider.c
+alculateOwnValue(FlatMapPro
+vider.java:53)
+	at org.gradle.api.internal
+.provider.AbstractMinimalPr
+ovider.calculateOwnPresentV
+alue(AbstractMinimalProvide
+r.java:80)
+	at org.gradle.api.internal
+.provider.AbstractMinimalPr
+ovider.get(AbstractMinimalP
+rovider.java:100)
+	at org.gradle.api.internal
+.provider.ProviderResolutio
+nStrategy$2.resolve(Provide
+rResolutionStrategy.java:33
+)
+	at org.gradle.api.internal
+.file.collections.ProviderB
+ackedFileCollection.visitDe
+pendencies(ProviderBackedFi
+leCollection.java:57)
+	at org.gradle.api.internal
+.AbstractTaskDependencyCont
+ainerVisitingContext.add(Ab
+stractTaskDependencyContain
+erVisitingContext.java:46)
+	at org.gradle.api.internal
+.file.collections.Unpacking
+Visitor.add(UnpackingVisito
+r.java:77)
+	at org.gradle.api.internal
+.file.collections.DefaultCo
+nfigurableFileCollection$Un
+resolvedItemsCollector.visi
+tContents(DefaultConfigurab
+leFileCollection.java:593)
+Watched directory hierarchies: []
+	at org.gradle.api.internal
+.file.collections.DefaultCo
+nfigurableFileCollection.vi
+sitChildren(DefaultConfigur
+ableFileCollection.java:440
+)
+	at org.gradle.api.internal
+.file.CompositeFileCollecti
+on.visitDependencies(Compos
+iteFileCollection.java:102)
+	at org.gradle.api.internal
+.file.collections.DefaultCo
+nfigurableFileCollection.vi
+sitDependencies(DefaultConf
+igurableFileCollection.java
+:446)
+	at org.gradle.api.internal
+.AbstractTaskDependencyCont
+ainerVisitingContext.add(Ab
+stractTaskDependencyContain
+erVisitingContext.java:46)
+	at org.gradle.api.internal
+.file.AbstractFileCollectio
+n.lambda$getBuildDependenci
+es$0(AbstractFileCollection
+.java:99)
+	at org.gradle.api.internal
+.tasks.DefaultTaskDependenc
+y.visitDependencies(Default
+TaskDependency.java:151)
+	at org.gradle.api.internal
+.AbstractTaskDependencyCont
+ainerVisitingContext.add(Ab
+stractTaskDependencyContain
+erVisitingContext.java:46)
+	at org.gradle.api.internal
+.artifacts.ivyservice.resol
+veengine.artifact.LocalFile
+DependencyBackedArtifactSet
+.visitDependencies(LocalFil
+eDependencyBackedArtifactSe
+t.java:186)
+	at org.gradle.api.internal
+.AbstractTaskDependencyCont
+ainerVisitingContext.add(Ab
+stractTaskDependencyContain
+erVisitingContext.java:46)
+	at org.gradle.api.internal
+.artifacts.ivyservice.resol
+veengine.artifact.DefaultSe
+lectedArtifactSet.visitDepe
+ndencies(DefaultSelectedArt
+ifactSet.java:47)
+	at org.gradle.api.internal
+.artifacts.configurations.R
+esolutionBackedFileCollecti
+on.visitDependencies(Resolu
+tionBackedFileCollection.ja
+va:59)
+	at org.gradle.api.internal
+.tasks.CachingTaskDependenc
+yResolveContext$TaskGraphIm
+pl.getNodeValues(CachingTas
+kDependencyResolveContext.j
+ava:103)
+	at org.gradle.internal.gra
+ph.CachingDirectedGraphWalk
+er$GraphWithEmptyEdges.getN
+odeValues(CachingDirectedGr
+aphWalker.java:213)
+	at org.gradle.internal.gra
+ph.CachingDirectedGraphWalk
+er.doSearch(CachingDirected
+GraphWalker.java:121)
+	at org.gradle.internal.gra
+ph.CachingDirectedGraphWalk
+er.findValues(CachingDirect
+edGraphWalker.java:73)
+	at org.gradle.api.internal
+.tasks.CachingTaskDependenc
+yResolveContext.getDependen
+cies(CachingTaskDependencyR
+esolveContext.java:66)
+	... 155 more
+Caused by: 
+java.io.IOException: The 
+filename, directory name, 
+or volume label syntax is 
+incorrect
+	at com.android.build.gradl
+e.internal.SdkLocator$SdkLo
+cationSource.validateSdkPat
+h(SdkLocator.kt:184)
+	at com.android.build.gradl
+e.internal.SdkLocator$SdkLo
+cationSource$LOCAL_SDK_DIR.
+getSdkPathProperty(SdkLocat
+or.kt:89)
+	at com.android.build.gradl
+e.internal.SdkLocator$SdkLo
+cationSource.getSdkLocation
+(SdkLocator.kt:169)
+	at com.android.build.gradl
+e.internal.SdkLocator.getSd
+kLocation(SdkLocator.kt:221
+)
+	at com.android.build.gradl
+e.internal.SdkDirectLoading
+Strategy.loadSdkComponents(
+SdkDirectLoadingStrategy.kt
+:97)
+	at com.android.build.gradl
+e.internal.SdkDirectLoading
+Strategy.init(SdkDirectLoad
+ingStrategy.kt:92)
+	at com.android.build.gradl
+e.internal.SdkDirectLoading
+Strategy.access$init(SdkDir
+ectLoadingStrategy.kt:46)
+	at com.android.build.gradl
+e.internal.SdkDirectLoading
+Strategy$components$2.invok
+e(SdkDirectLoadingStrategy.
+kt:71)
+	at com.android.build.gradl
+e.internal.SdkDirectLoading
+Strategy$components$2.invok
+e(SdkDirectLoadingStrategy.
+kt:70)
+	at kotlin.SynchronizedLazy
+Impl.getValue(LazyJVM.kt:74
+)
+	at com.android.build.gradl
+e.internal.SdkDirectLoading
+Strategy.getComponents(SdkD
+irectLoadingStrategy.kt:70)
+	at com.android.build.gradl
+e.internal.SdkDirectLoading
+Strategy.loadedSuccessfully
+(SdkDirectLoadingStrategy.k
+t:178)
+	at com.android.build.gradl
+e.internal.SdkLoadingStrate
+gy.getCoreForSystemModulesJ
+ar(SdkLoadingStrategy.kt:53
+)
+	at com.android.build.gradl
+e.internal.SdkComponentsBui
+ldService$VersionedSdkLoade
+r$coreForSystemModulesProvi
+der$1.call(SdkComponents.kt
+:286)
+	at com.android.build.gradl
+e.internal.SdkComponentsBui
+ldService$VersionedSdkLoade
+r$coreForSystemModulesProvi
+der$1.call(SdkComponents.kt
+:285)
+	at org.gradle.api.internal
+.provider.DefaultProvider.c
+alculateOwnValue(DefaultPro
+vider.java:72)
+	... 180 more
+
+
+BUILD FAILED in 4m 35s

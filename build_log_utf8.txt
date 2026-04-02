@@ -1,0 +1,51 @@
+﻿
+> Configure project :app
+WARNING: Using flatDir should be avoided because it doesn't support any meta-data formats.
+
+> Configure project :capacitor-cordova-android-plugins
+WARNING: Using flatDir should be avoided because it doesn't support any meta-data formats.
+cmd : 
+At line:1 char:103
++ ...  -Last 100; cmd /c 
+"cd android && gradlew 
+assembleDebug" > 
+build_log. ...
++                 ~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo         
+     : NotSpecified: (:St  
+  ring) [], RemoteExcept   
+ ion
+    + FullyQualifiedErrorI 
+   d : NativeCommandError
+ 
+FAILURE: Build failed with 
+an exception.
+
+* What went wrong:
+A problem occurred 
+configuring project 
+':capacitor-status-bar'.
+> java.util.concurrent.Exec
+utionException: org.gradle.
+api.GradleException: 
+Failed to create Jar file C
+:\Users\Joshan\.gradle\cach
+es\jars-9\18366b31678c01718
+57be093a3b8ec22\bcprov-jdk1
+8on-1.79.jar.
+
+* Try:
+> Run with --stacktrace 
+option to get the stack 
+trace.
+> Run with --info or 
+--debug option to get more 
+log output.
+> Run with --scan to get 
+full insights.
+> Get more help at 
+https://help.gradle.org.
+
+BUILD FAILED in 6s
