@@ -29,6 +29,7 @@ jobs:
           rm -rf ios
           npx cap add ios
           npx cap sync ios
+          npx @capacitor/assets generate --ios
 
       - name: Build iOS App (Unsigned)
         run: |
