@@ -8,15 +8,7 @@ export default defineConfig({
     port: 2000
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-          'vendor-ui': ['framer-motion', 'lucide-react'],
-          'vendor-supabase': ['@supabase/supabase-js']
-        }
-      }
-    },
+    target: 'es2015',
     chunkSizeWarningLimit: 1000
   }
 });
