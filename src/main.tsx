@@ -3,7 +3,7 @@ import './index.css';
 import App from './App.tsx';
 
 // Universal Error Trap for Mobile Debugging
-window.onerror = function(message, source, lineno, colno, error) {
+window.onerror = function(message, source, lineno, _colno, _error) {
   const errDiv = document.createElement('div');
   errDiv.style.position = 'fixed';
   errDiv.style.top = '0';
