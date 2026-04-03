@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route, Navigate, useNavigate, useLocation
 import { App as CapacitorApp } from '@capacitor/app';
 import { StatusBar } from '@capacitor/status-bar';
 import { Capacitor } from '@capacitor/core';
+import { SplashScreen as NativeSplashScreen } from '@capacitor/splash-screen';
 import Home from './pages/Home.tsx';
 import Movies from './pages/Movies.tsx';
 import Login from './pages/Login.tsx';
@@ -86,8 +87,9 @@ const App: React.FC = () => {
             if (Capacitor.isNativePlatform()) {
                 try {
                     await StatusBar.hide();
+                    await NativeSplashScreen.hide();
                 } catch (e) {
-                    console.warn('Status bar hide failed:', e);
+                    console.warn('System UI interaction failed:', e);
                 }
             }
         };
