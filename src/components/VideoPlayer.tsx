@@ -110,7 +110,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ fullPage = false, movie: prop
             });
         }
     }
-  }, [isPlayerOpen, fullPage, selectedMovie?.id]);
+  }, [isPlayerOpen, fullPage, selectedMovie?.id, isMuted, selectedMovie]);
 
   const togglePlay = () => {
     if (videoRef.current) {

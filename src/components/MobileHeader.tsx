@@ -39,8 +39,8 @@ const MobileHeader: React.FC = () => {
                 </div>
                 
                 {/* Center Notch for FT */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 flex justify-center">
-                    <div className="bg-black/90 backdrop-blur-3xl px-12 pb-5 pt-1 rounded-b-[45px] border-b border-x border-white/10 shadow-[0_25px_40px_rgba(0,0,0,0.9)] relative">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 pt-[env(safe-area-inset-top)] flex justify-center">
+                    <div className="bg-black/90 backdrop-blur-3xl px-12 pb-5 pt-2 rounded-b-[45px] border-b border-x border-white/10 shadow-[0_25px_40px_rgba(0,0,0,0.9)] relative">
                         <span className="text-primary text-2xl font-black italic tracking-tighter drop-shadow-[0_0_12px_rgba(255,184,0,0.8)]">FT</span>
                     </div>
                 </div>

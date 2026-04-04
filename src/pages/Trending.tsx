@@ -16,7 +16,7 @@ const Trending: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-black pb-32">
       
-      <main className="pt-32 px-[4%] md:px-[6%]">
+      <main className="pt-[calc(env(safe-area-inset-top)+6rem)] px-[4%] md:px-[6%]">
         <header className="mb-12">
             <motion.div 
                 initial={{ opacity: 0, x: -20 }}

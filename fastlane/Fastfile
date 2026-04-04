@@ -1,0 +1,26 @@
+# Fastlane Build "Sideload Formula"
+# This file automates the creation of a 'working' unsigned IPA for sideloading.
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Build a clean unsigned IPA for sideloading (AltStore, Sideloadly, etc.)"
+  lane :build_unsigned do
+    # Prepare the project (usually handled by GitHub Action before this)
+    # But we can add a sync step here if needed
+    
+    gym(
+      workspace: "App.xcworkspace",
+      scheme: "App",
+      configuration: "Debug", # Debug is easier for sideloading stability
+      output_directory: "../../build",
+      output_name: "FilamuTimes_Premium.ipa",
+      export_method: "development",
+      skip_codesigning: true,
+      # We skip packaging if manual zip is preferred, but GYM does it better
+      skip_package_ipa: false,
+      clean: true,
+      build_path: "./derived_data"
+    )
+  end
+end

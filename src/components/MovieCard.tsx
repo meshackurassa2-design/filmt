@@ -73,7 +73,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, variant = 'backdrop' }) =>
           </div>
           <div className="flex items-center gap-1">
              <Eye className="w-3 h-3" />
-             <span>{(Math.floor(Math.random() * 20) + 1)}M+ Views</span>
+             <span>{(movie.id.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % 20) + 1}M+ Views</span>
           </div>
         </div>
       </div>

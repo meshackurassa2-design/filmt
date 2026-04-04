@@ -8,7 +8,7 @@ const Movies: React.FC = () => {
     const { allMovies } = useMovies();
 
     return (
-        <div className="min-h-screen bg-black pt-28 pb-40 px-6">
+        <div className="min-h-screen bg-black pt-[calc(env(safe-area-inset-top)+6rem)] pb-40 px-6">
             <div className="flex flex-col mb-12">
                 <div className="flex items-center gap-3 mb-2">
                     <div className="w-10 h-10 rounded-2xl bg-primary/20 flex items-center justify-center border border-primary/20">

@@ -24,8 +24,6 @@ const BottomNav: React.FC = () => {
     ].includes(location.pathname) || 
     (isPlayerOpen && isLandscape);
 
-    if (isHidden) return null;
-
     const navItems = [
         { path: '/', icon: Home, label: 'Home' },
         { path: '/search', icon: Search, label: 'Search' },
@@ -40,6 +38,26 @@ const BottomNav: React.FC = () => {
         stiffness: 300,
         damping: 30
     });
+
+    const pathD = useTransform(xOffsetSpring, (x) => {
+        const center = x * 4; 
+        const width = 45; 
+        const depth = 35; 
+        return `
+            M 0,20 
+            Q 0,0 20,0 
+            L ${center - width},0 
+            C ${center - width/2},0 ${center - width/2},${depth} ${center},${depth} 
+            C ${center + width/2},${depth} ${center + width/2},0 ${center + width},0 
+            L 380,0 
+            Q 400,0 400,20 
+            L 400,80 
+            L 0,80 
+            Z
+        `;
+    });
+
+    if (isHidden) return null;
 
     return (
         <div className="fixed bottom-0 inset-x-0 z-[6000] flex justify-center px-4 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pointer-events-none">
@@ -56,23 +74,7 @@ const BottomNav: React.FC = () => {
                     preserveAspectRatio="none"
                 >
                     <motion.path
-                        d={useTransform(xOffsetSpring, (x) => {
-                            const center = x * 4; 
-                            const width = 45; 
-                            const depth = 35; 
-                            return `
-                                M 0,20 
-                                Q 0,0 20,0 
-                                L ${center - width},0 
-                                C ${center - width/2},0 ${center - width/2},${depth} ${center},${depth} 
-                                C ${center + width/2},${depth} ${center + width/2},0 ${center + width},0 
-                                L 380,0 
-                                Q 400,0 400,20 
-                                L 400,80 
-                                L 0,80 
-                                Z
-                            `;
-                        })}
+                        d={pathD}
                         fill="rgba(0,0,0,0.6)"
                     />
                 </svg>

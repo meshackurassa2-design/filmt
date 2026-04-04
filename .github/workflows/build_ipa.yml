@@ -1,4 +1,4 @@
-name: Build Unsigned IPA
+name: Build Sideload IPA (Modern Formula)
 
 on:
   push:
@@ -16,7 +16,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
+          cache: 'npm'
 
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
@@ -24,37 +25,42 @@ jobs:
       - name: Build Web Project
         run: npm run build
 
-      - name: Sync Capacitor iOS
+      - name: Setup Capacitor iOS
         run: |
           rm -rf ios
           npx cap add ios
           npx cap sync ios
-          npx @capacitor/assets generate --ios
+          # Generate icons/splash if they exist
+          if [ -d "assets" ]; then
+            npx @capacitor/assets generate --ios
+          fi
 
-      - name: Build iOS App (Unsigned)
+      - name: Setup Ruby for Fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Install Fastlane
+        run: gem install fastlane
+
+      - name: Build IPA using Fastlane (Sideload Formula)
         run: |
+          # Move our robust formula into the newly generated iOS project
+          mkdir -p ios/App/fastlane
+          cp fastlane/Fastfile ios/App/fastlane/
           cd ios/App
-          xcodebuild -workspace App.xcworkspace \
-                     -scheme App \
-                     -configuration Debug \
-                     -sdk iphoneos \
-                     -derivedDataPath build \
-                     CODE_SIGNING_ALLOWED=NO \
-                     CODE_SIGN_IDENTITY="" \
-                     CODE_SIGNING_REQUIRED=NO \
-                     clean build
+          fastlane build_unsigned --verbose
+        env:
+          FASTLANE_XCODEBUILD_SETTINGS_RETRIES: 5
+          # Disable some checks that fail an unsigned CI build
+          CODE_SIGNING_REQUIRED: NO
+          CODE_SIGNING_ALLOWED: NO
 
-      - name: Create IPA (Unsigned)
-        run: |
-          mkdir -p Payload
-          # Find the .app in the derived data
-          APP_PATH=$(find ios/App/build -name "*.app" | head -n 1)
-          cp -r "$APP_PATH" Payload/
-          zip -r FilamuTimes_Premium.ipa Payload
-          
-      - name: Upload IPA Artifact
+      - name: Upload Working Sideload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: FilamuTimes_Premium_Unsigned_IPA
-          path: FilamuTimes_Premium.ipa
+          name: FilamuTimes_Sideload_IPA
+          path: build/FilamuTimes_Premium.ipa
           retention-days: 7
+          if-no-files-found: error

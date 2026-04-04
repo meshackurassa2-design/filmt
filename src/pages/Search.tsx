@@ -31,7 +31,7 @@ const Search: React.FC = () => {
     return (
         <div className="min-h-screen bg-black">
             
-            <main className="pt-32 pb-40 px-[4%] md:px-[6%]">
+            <main className="pt-[calc(env(safe-area-inset-top)+6rem)] pb-40 px-[4%] md:px-[6%]">
                 {/* Search Bar & Header */}
                 <div className="max-w-4xl mx-auto mb-16">
                     <motion.div 

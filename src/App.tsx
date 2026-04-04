@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { App as CapacitorApp } from '@capacitor/app';
-import { StatusBar } from '@capacitor/status-bar';
+import { StatusBar, Style } from '@capacitor/status-bar';
 import { Capacitor } from '@capacitor/core';
 import { SplashScreen as NativeSplashScreen } from '@capacitor/splash-screen';
 import Home from './pages/Home.tsx';
@@ -18,7 +18,7 @@ import BottomNav from './components/BottomNav.tsx';
 import Navbar from './components/Navbar.tsx';
 import MobileHeader from './components/MobileHeader.tsx';
 import { MovieProvider } from './context/MovieContext.tsx';
-import { AuthProvider } from './context/AuthContext.tsx';
+import { AuthProvider, useAuth } from './context/AuthContext.tsx';
 import { ProtectedRoute } from './components/ProtectedRoute.tsx';
 
 // Internal component to handle hardware back button
@@ -59,7 +59,7 @@ const StatusBarHandler = () => {
                     await StatusBar.hide();
                     // Just in case it's visible, ensure it's black
                     await StatusBar.setBackgroundColor({ color: '#000000' });
-                    await StatusBar.setStyle({ style: 'DARK' as any }); // 'DARK' = dark content on light bg, 'LIGHT' = light content on dark bg. Capacitor 5/6 uses 'Dark' and 'Light'. Actually it depends on the version. Let's use 'DARK' (white text) for black bg.
+                    await StatusBar.setStyle({ style: Style.Dark }); 
                 } catch (e) {
                     console.warn('Status bar hide failed:', e);
                 }
@@ -71,9 +71,65 @@ const StatusBarHandler = () => {
     return null;
 };
 
+const AppContent: React.FC = () => {
+    const { loading } = useAuth();
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
+                <div className="flex flex-col items-center gap-6 animate-pulse">
+                    <div className="flex flex-col items-center">
+                        <h1 className="text-4xl font-black italic tracking-tighter text-[#FFB800] leading-none">
+                            FILAMU
+                        </h1>
+                        <h1 className="text-4xl font-black italic tracking-tighter text-white leading-none">
+                            TIMES
+                        </h1>
+                    </div>
+                    <div className="w-10 h-10 border-4 border-[#FFB800] border-t-transparent rounded-full animate-spin shadow-[0_0_15px_rgba(255,184,0,0.3)]" />
+                    <div className="flex flex-col items-center gap-1">
+                        <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.3em]">Connecting to Filamu</p>
+                        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent via-[#FFB800] to-transparent opacity-50" />
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <Router>
+            <BackButtonHandler />
+            <StatusBarHandler />
+            
+            <Navbar />
+            <MobileHeader />
+            <div className="flex flex-col min-h-screen border-t-[0px] border-transparent pt-0">
+                <main className="flex-grow">
+                    <Routes>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/signup" element={<SignUp />} />
+
+                        <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+                        <Route path="/movies" element={<ProtectedRoute><Movies /></ProtectedRoute>} />
+                        <Route path="/search" element={<ProtectedRoute><Search /></ProtectedRoute>} />
+                        <Route path="/profiles" element={<ProtectedRoute><Profiles /></ProtectedRoute>} />
+                        <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
+                        <Route path="/watch/:id" element={<ProtectedRoute><Watch /></ProtectedRoute>} />
+                        <Route path="/trending" element={<ProtectedRoute><Trending /></ProtectedRoute>} />
+                        
+                        <Route path="/admin" element={<ProtectedRoute requireAdmin><Admin /></ProtectedRoute>} />
+
+                        <Route path="*" element={<Navigate to="/" replace />} />
+                    </Routes>
+                </main>
+                <BottomNav />
+            </div>
+        </Router>
+    );
+};
+
 const App: React.FC = () => {
     useEffect(() => {
-        // Global Immersive Mode (Fullscreen)
         const hideSystemUI = async () => {
             if (Capacitor.isNativePlatform()) {
                 try {
@@ -91,36 +147,7 @@ const App: React.FC = () => {
     return (
         <AuthProvider>
             <MovieProvider>
-                <Router>
-                    <BackButtonHandler />
-                    <StatusBarHandler />
-                    
-                    <Navbar />
-                    <MobileHeader />
-                    <div className="flex flex-col min-h-screen border-t-[0px] border-transparent pt-0">
-                        <main className="flex-grow">
-                            <Routes>
-                                <Route path="/login" element={<Login />} />
-                                <Route path="/signup" element={<SignUp />} />
-
-                                {/* Protected Routes */}
-                                <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-                                <Route path="/movies" element={<ProtectedRoute><Movies /></ProtectedRoute>} />
-                                <Route path="/search" element={<ProtectedRoute><Search /></ProtectedRoute>} />
-                                <Route path="/profiles" element={<ProtectedRoute><Profiles /></ProtectedRoute>} />
-                                <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
-                                <Route path="/watch/:id" element={<ProtectedRoute><Watch /></ProtectedRoute>} />
-                                <Route path="/trending" element={<ProtectedRoute><Trending /></ProtectedRoute>} />
-                                
-                                {/* Admin Route */}
-                                <Route path="/admin" element={<ProtectedRoute requireAdmin><Admin /></ProtectedRoute>} />
-
-                                <Route path="*" element={<Navigate to="/" replace />} />
-                            </Routes>
-                        </main>
-                        <BottomNav />
-                    </div>
-                </Router>
+                <AppContent />
             </MovieProvider>
         </AuthProvider>
     );

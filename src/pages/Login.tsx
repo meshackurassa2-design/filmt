@@ -43,7 +43,7 @@ const Login: React.FC = () => {
             {/* Glowing Spotlight */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-[#E50914]/5 rounded-full blur-[120px] pointer-events-none" />
 
-            <nav className="relative z-10 px-8 py-8 md:px-12 flex items-center justify-between">
+            <nav className="relative z-10 pt-[calc(env(safe-area-inset-top)+2rem)] px-8 pb-8 md:px-12 flex items-center justify-between">
                 <motion.div 
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -146,7 +146,7 @@ const Login: React.FC = () => {
                 </motion.div>
             </main>
 
-            <footer className="relative z-10 p-8 text-center bg-black/40 backdrop-blur-xl border-t border-white/5">
+            <footer className="relative z-10 pt-8 px-8 pb-[calc(env(safe-area-inset-bottom)+2rem)] text-center bg-black/40 backdrop-blur-xl border-t border-white/5">
                 <p className="text-gray-700 text-[10px] font-black uppercase tracking-[0.4em] flex items-center justify-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#E50914] animate-pulse" />
                     Filamu Originals • African Cinematic Universe

@@ -7,6 +7,27 @@ interface Category {
   movies: Movie[];
 }
 
+interface MovieData {
+  id: string;
+  title: string;
+  description: string;
+  thumbnail_url: string;
+  category: string;
+  video_url: string;
+  subtitle_en_url?: string;
+  subtitle_sw_url?: string;
+  release_year?: number;
+  type?: 'movie' | 'tvshow';
+  rating?: number;
+}
+
+interface MovieLike {
+  id: string;
+  movie_id: string;
+  user_id: string;
+  vote: number;
+}
+
 interface MovieContextType {
   allMovies: Movie[];
   categories: Category[];
@@ -41,12 +62,12 @@ export const MovieProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('All');
   const [selectedYear, setSelectedYear] = useState('All');
-  const [allLikes, setAllLikes] = useState<any[]>([]);
+  const [allLikes, setAllLikes] = useState<MovieLike[]>([]);
 
-  const refreshMovies = async () => {
+  const refreshMovies = React.useCallback(async () => {
     const { data } = await supabase.from('movies').select('*').order('created_at', { ascending: false });
     if (data) {
-      const mappedMovies: Movie[] = data.map((m: any) => ({
+      const mappedMovies: Movie[] = (data as MovieData[]).map((m) => ({
         id: m.id,
         title: m.title,
         description: m.description,
@@ -63,8 +84,8 @@ export const MovieProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     }
 
     const { data: likesData } = await supabase.from('movie_likes').select('*');
-    if (likesData) setAllLikes(likesData);
-  };
+    if (likesData) setAllLikes(likesData as MovieLike[]);
+  }, []);
 
   useEffect(() => {
     refreshMovies();
@@ -72,7 +93,7 @@ export const MovieProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const savedLikes = localStorage.getItem('filamu_likes');
     if (savedList) setMyList(JSON.parse(savedList));
     if (savedLikes) setLikedMovies(JSON.parse(savedLikes));
-  }, []);
+  }, [refreshMovies]);
 
   useEffect(() => {
     localStorage.setItem('filamu_mylist', JSON.stringify(myList));
@@ -118,7 +139,7 @@ export const MovieProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     })).filter(c => c.movies.length > 0);
 
     return [...baseCats, ...genreCats];
-  }, [filteredMovies]);
+  }, [filteredMovies, allLikes]);
 
   const addToMyList = (movie: Movie) => {
     if (!myList.find(m => m.id === movie.id)) {

@@ -79,8 +79,9 @@ const Admin: React.FC = () => {
         if (error) throw error;
         setCategories(data || []);
         if (data && data.length > 0 && !genre) setGenre(data[0].name);
-    } catch (err: any) {
-        console.error('Error fetching categories:', err.message);
+    } catch (err) {
+        const error = err as Error;
+        console.error('Error fetching categories:', error.message);
     }
   };
 
@@ -117,8 +118,9 @@ const Admin: React.FC = () => {
           if (error) throw error;
           setNewCategoryName('');
           await fetchCategories();
-      } catch (err: any) {
-          alert('Error: ' + err.message);
+      } catch (err) {
+          const error = err as Error;
+          alert('Error: ' + error.message);
       } finally {
           setIsCategoryLoading(false);
       }
@@ -130,8 +132,9 @@ const Admin: React.FC = () => {
           const { error } = await supabase.from('movie_categories').delete().eq('id', id);
           if (error) throw error;
           await fetchCategories();
-      } catch (err: any) {
-          alert('Error: ' + err.message);
+      } catch (err) {
+          const error = err as Error;
+          alert('Error: ' + error.message);
       }
   };
 
@@ -170,7 +173,7 @@ const Admin: React.FC = () => {
             const { error: uploadError } = await (supabase.storage.from('thumbnails') as any).upload(posterName, poster, {
                 cacheControl: '3600',
                 upsert: true,
-                onUploadProgress: (p: any) => {
+                onUploadProgress: (p: { loaded: number; total?: number }) => {
                     const loaded = p.loaded || 0;
                     const total = p.total || 1;
                     const percent = Math.round((loaded / total) * 100);
@@ -192,7 +195,7 @@ const Admin: React.FC = () => {
                 cacheControl: '3600',
                 upsert: true,
                 resumable: true, // Enable TUS protocol for large files
-                onUploadProgress: (p: any) => {
+                onUploadProgress: (p: { loaded: number; total?: number }) => {
                     const loaded = p.loaded || 0;
                     const total = p.total || 1;
                     const percent = Math.round((loaded / total) * 100);
@@ -252,8 +255,9 @@ const Admin: React.FC = () => {
         setPoster(null);
         setVideo(null);
         setShowUploadForm(false);
-    } catch (err: any) {
-        let msg = err.message;
+    } catch (err) {
+        const error = err as Error;
+        let msg = error.message;
         if (msg.includes('Failed to fetch')) {
             msg = "Access Denied / Timeout: Ensure file is under 50MB (Dashboard Limit) or check your connection.";
         }
@@ -269,7 +273,7 @@ const Admin: React.FC = () => {
           // Format: https://[project].supabase.co/storage/v1/object/public/[bucket]/[path]
           const parts = url.split(`/public/${bucket}/`);
           return parts.length > 1 ? parts[1] : null;
-      } catch (err) {
+      } catch (_err) {
           return null;
       }
   };
@@ -297,8 +301,9 @@ const Admin: React.FC = () => {
 
           setStatus({ text: "Registry entry purged.", type: 'success' });
           await refreshMovies();
-      } catch (err: any) {
-          setStatus({ text: "Cleanup failed: " + err.message, type: 'error' });
+      } catch (err) {
+          const error = err as Error;
+          setStatus({ text: "Cleanup failed: " + error.message, type: 'error' });
       } finally {
           setDeletingId(null);
           setTimeout(() => setStatus(null), 3000);

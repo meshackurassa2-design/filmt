@@ -107,7 +107,7 @@ const Account: React.FC = () => {
     return (
         <div className="min-h-screen bg-black text-white font-sans selection:bg-[#E50914]">
             {/* Minimal Header */}
-            <div className={`fixed top-0 left-0 right-0 z-50 p-6 flex items-center justify-between transition-all bg-black/80 backdrop-blur-xl border-b border-white/5`}>
+            <div className={`fixed top-0 left-0 right-0 z-50 pt-[env(safe-area-inset-top)] px-6 pb-6 flex items-center justify-between transition-all bg-black/80 backdrop-blur-xl border-b border-white/5`}>
                 <button onClick={() => navigate(-1)} className="p-2 hover:bg-white/10 rounded-full transition-colors">
                     <ChevronLeft className="w-6 h-6" />
                 </button>
@@ -117,7 +117,7 @@ const Account: React.FC = () => {
                 <div className="w-10" /> {/* Spacer */}
             </div>
 
-            <div className="pt-24 pb-32 max-w-2xl mx-auto">
+            <div className="pt-[calc(env(safe-area-inset-top)+6rem)] pb-[calc(env(safe-area-inset-bottom)+8rem)] max-w-2xl mx-auto">
                 {/* Profile Mastery */}
                 <div className="px-6 flex flex-col items-center mb-12">
                      <div className="relative group mb-4">

@@ -17,7 +17,7 @@ const Profiles: React.FC = () => {
     };
 
     return (
-        <div className="relative flex items-center justify-center min-h-screen bg-black overflow-hidden py-20 font-sans">
+        <div className="relative flex items-center justify-center min-h-screen bg-black overflow-hidden pt-[calc(env(safe-area-inset-top)+2rem)] pb-[calc(env(safe-area-inset-bottom)+2rem)] font-sans">
             {/* 1. Cinematic Background Backdrop */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-black to-black" />

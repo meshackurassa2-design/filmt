@@ -41,11 +41,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   useEffect(() => {
+    // Safety timeout: If Supabase doesn't respond in 3.5s, force unlock the UI
+    const safetyTimeout = setTimeout(() => {
+      if (loading) {
+        console.warn('Auth initialization timed out. Force-releasing UI.');
+        setLoading(false);
+      }
+    }, 3500);
+
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
       if (session?.user) fetchProfile(session.user.id);
       setLoading(false);
+      clearTimeout(safetyTimeout);
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -54,9 +63,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (session?.user) fetchProfile(session.user.id);
       else setProfile(null);
       setLoading(false);
+      clearTimeout(safetyTimeout);
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+      if (safetyTimeout) clearTimeout(safetyTimeout);
+    };
   }, [fetchProfile]);
 
   const signOut = async () => {
