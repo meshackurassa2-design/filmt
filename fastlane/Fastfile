@@ -1,26 +1,31 @@
 # Fastlane Build "Sideload Formula"
 # This file automates the creation of a 'working' unsigned IPA for sideloading.
+# It uses raw xcodebuild to bypass provisioning profile requirements.
 
 default_platform(:ios)
 
 platform :ios do
   desc "Build a clean unsigned IPA for sideloading (AltStore, Sideloadly, etc.)"
   lane :build_unsigned do
-    # Prepare the project (usually handled by GitHub Action before this)
-    # But we can add a sync step here if needed
-    
-    gym(
-      workspace: "App.xcworkspace",
-      scheme: "App",
-      configuration: "Debug", # Debug is easier for sideloading stability
-      output_directory: "../../build",
-      output_name: "FilamuTimes_Premium.ipa",
-      export_method: "development",
-      skip_codesigning: true,
-      # We skip packaging if manual zip is preferred, but GYM does it better
-      skip_package_ipa: false,
-      clean: true,
-      build_path: "./derived_data"
+    # 1. Build the .app directly using xcodebuild with no signing
+    sh(
+      "xcodebuild -workspace App.xcworkspace " \
+      "-scheme App " \
+      "-configuration Debug " \
+      "-sdk iphoneos " \
+      "-derivedDataPath ./build " \
+      "CODE_SIGNING_ALLOWED=NO " \
+      "CODE_SIGN_IDENTITY='' " \
+      "CODE_SIGNING_REQUIRED=NO"
     )
+
+    # 2. Package into IPA for Sideload Tools
+    sh("mkdir -p Payload")
+    sh("cp -r build/Build/Products/Debug-iphoneos/App.app Payload/")
+    sh("zip -r FilamuTimes_Premium.ipa Payload")
+    
+    # 3. Clean up the source files for cleaner artifacts
+    sh("mv FilamuTimes_Premium.ipa ../../")
+    sh("rm -rf Payload build")
   end
 end
