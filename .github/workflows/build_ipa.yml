@@ -46,16 +46,12 @@ jobs:
 
       - name: Build IPA using Fastlane (Sideload Formula)
         run: |
-          # Move our robust formula into the newly generated iOS project
-          mkdir -p ios/App/fastlane
-          cp fastlane/Fastfile ios/App/fastlane/
-          cd ios/App
-          fastlane build_unsigned --verbose
+          # Ensure CocoaPods are installed for the workspace
+          cd ios/App && pod install && cd ../..
+          # Run the manual sideload formula from root
+          bundle exec fastlane ios build_unsigned --verbose
         env:
           FASTLANE_XCODEBUILD_SETTINGS_RETRIES: 5
-          # Disable some checks that fail an unsigned CI build
-          CODE_SIGNING_REQUIRED: NO
-          CODE_SIGNING_ALLOWED: NO
 
       - name: Upload Working Sideload Artifact
         uses: actions/upload-artifact@v4

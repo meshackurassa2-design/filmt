@@ -7,25 +7,33 @@ default_platform(:ios)
 platform :ios do
   desc "Build a clean unsigned IPA for sideloading (AltStore, Sideloadly, etc.)"
   lane :build_unsigned do
-    # 1. Build the .app directly using xcodebuild with no signing
-    sh(
-      "xcodebuild -workspace App.xcworkspace " \
-      "-scheme App " \
-      "-configuration Debug " \
-      "-sdk iphoneos " \
-      "-derivedDataPath ./build " \
-      "CODE_SIGNING_ALLOWED=NO " \
-      "CODE_SIGN_IDENTITY='' " \
-      "CODE_SIGNING_REQUIRED=NO"
-    )
+    # This must run inside the ios/App directory where the workspace is located
+    Dir.chdir("ios/App") do
+      # 1. Build the .app directly using xcodebuild with no signing
+      sh(
+        "xcodebuild -workspace App.xcworkspace " \
+        "-scheme App " \
+        "-configuration Debug " \
+        "-sdk iphoneos " \
+        "-derivedDataPath ./build " \
+        "CODE_SIGNING_ALLOWED=NO " \
+        "CODE_SIGN_IDENTITY='' " \
+        "CODE_SIGNING_REQUIRED=NO " \
+        "CODE_SIGN_ENTITLEMENTS='' " \
+        "PROVISIONING_PROFILE_SPECIFIER='' " \
+        "ALLOW_PROVISIONING_DEVICE_REGISTRATION=NO"
+      )
 
-    # 2. Package into IPA for Sideload Tools
-    sh("mkdir -p Payload")
-    sh("cp -r build/Build/Products/Debug-iphoneos/App.app Payload/")
-    sh("zip -r FilamuTimes_Premium.ipa Payload")
-    
-    # 3. Clean up the source files for cleaner artifacts
-    sh("mv FilamuTimes_Premium.ipa ../../")
-    sh("rm -rf Payload build")
+      # 2. Package into IPA for Sideload Tools
+      # AltStore and Sideloadly expect the .app to be inside a 'Payload' folder
+      sh("mkdir -p Payload")
+      sh("cp -r build/Build/Products/Debug-iphoneos/App.app Payload/")
+      sh("zip -r FilamuTimes_Premium.ipa Payload")
+      
+      # 3. Move the final IPA to the root and clean up
+      sh("cp FilamuTimes_Premium.ipa ../../")
+      sh("rm -rf Payload build FilamuTimes_Premium.ipa")
+    end
   end
 end
+
