@@ -5,7 +5,7 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Build a clean unsigned IPA for sideloading (AltStore, Sideloadly, etc.)"
+  desc "Build an unsigned IPA for Sideloading (AltStore/Sideloadly)"
   lane :build_unsigned do
     # This must run inside the ios/App directory where the workspace is located
     Dir.chdir("ios/App") do
@@ -36,4 +36,3 @@ platform :ios do
     end
   end
 end
-

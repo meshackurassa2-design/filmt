@@ -8,9 +8,8 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-
     steps:
-      - name: Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -27,15 +26,13 @@ jobs:
 
       - name: Setup Capacitor iOS
         run: |
-          rm -rf ios
-          npx cap add ios
           npx cap sync ios
-          # Generate icons/splash if they exist
+          # Generate icons/splash if assets exist
           if [ -d "assets" ]; then
             npx @capacitor/assets generate --ios
           fi
 
-      - name: Setup Ruby for Fastlane
+      - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
@@ -46,14 +43,14 @@ jobs:
 
       - name: Build IPA using Fastlane (Sideload Formula)
         run: |
-          # Ensure CocoaPods are installed for the workspace
+          # Ensure CocoaPods are installed
           cd ios/App && pod install && cd ../..
-          # Run the manual sideload formula from root
+          # Run the manual sideload formula
           bundle exec fastlane ios build_unsigned --verbose
         env:
           FASTLANE_XCODEBUILD_SETTINGS_RETRIES: 5
 
-      - name: Upload Working Sideload Artifact
+      - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: FilamuTimes_Sideload_IPA
