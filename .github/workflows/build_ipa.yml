@@ -2,58 +2,43 @@ name: Build Sideload IPA (Modern Formula)
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+      branches: [ main ]
+        workflow_dispatch:
 
-jobs:
-  build:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+        jobs:
+          build:
+              runs-on: macos-latest
+                  steps:
+                        - name: Checkout Repository
+                                uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
+                                      - name: Set up Ruby
+                                              uses: ruby/setup-ruby@v1
+                                                      with:
+                                                                ruby-version: '3.2'
+                                                                          bundler-cache: true
 
-      - name: Install Dependencies
-        run: npm install --legacy-peer-deps
+                                                                                - name: Install Fastlane
+                                                                                        run: gem install fastlane
 
-      - name: Build Web Project
-        run: npm run build
-
-      - name: Setup Capacitor iOS
-        run: |
-          npx cap sync ios
-          # Generate icons/splash if assets exist
-          if [ -d "assets" ]; then
-            npx @capacitor/assets generate --ios
-          fi
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.3'
-          bundler-cache: true
-
-      - name: Install Fastlane
-        run: gem install fastlane
-
-      - name: Build IPA using Fastlane (Sideload Formula)
-        run: |
-          # Ensure CocoaPods are installed
-          cd ios/App && pod install && cd ../..
-          # Run the manual sideload formula
-          bundle exec fastlane ios build_unsigned --verbose
-        env:
-          FASTLANE_XCODEBUILD_SETTINGS_RETRIES: 5
-
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: FilamuTimes_Sideload_IPA
-          path: ./FilamuTimes_Premium.ipa
-          retention-days: 7
-          if-no-files-found: error
+                                                                                              - name: Install Brew Dependencies
+                                                                                                      run: |
+                                                                                                                brew install cocoapods
+                                                                                                                          
+                                                                                                                                - name: Initialize Workspace
+                                                                                                                                        run: |
+                                                                                                                                                  cd ios/App
+                                                                                                                                                            pod install
+                                                                                                                                                                      cd ../..
+                                                                                                                                                                      
+                                                                                                                                                                            - name: Build IPA using Fastlane
+                                                                                                                                                                                    run: fastlane build_unsigned
+                                                                                                                                                                                            env:
+                                                                                                                                                                                                      LC_ALL: en_US.UTF-8
+                                                                                                                                                                                                                LANG: en_US.UTF-8
+                                                                                                                                                                                                                
+                                                                                                                                                                                                                      - name: Upload Working Sideload Artifact
+                                                                                                                                                                                                                              uses: actions/upload-artifact@v4
+                                                                                                                                                                                                                                      with:
+                                                                                                                                                                                                                                                name: FilamuTimes_Sideload_IPA
+                                                                                                                                                                                                                                                          path: FilamuTimes_Sideload.ipa
