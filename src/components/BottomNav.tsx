@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Home, Search, LayoutGrid, Heart, Settings } from 'lucide-react';
-import { motion, useSpring, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useMovies } from '../context/MovieContext';
 
 const BottomNav: React.FC = () => {
@@ -32,7 +32,6 @@ const BottomNav: React.FC = () => {
         { path: '/account', icon: Settings, label: 'Settings' },
     ];
 
-    const activeIndex = navItems.findIndex(item => item.path === location.pathname);
 
     if (isHidden) return null;
 

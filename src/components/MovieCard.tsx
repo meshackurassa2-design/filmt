@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Play, Star, Eye } from 'lucide-react';
+import { Play } from 'lucide-react';
 import { Movie } from '../types/movie';
 import { useMovies } from '../context/MovieContext';
 import { useNavigate } from 'react-router-dom';

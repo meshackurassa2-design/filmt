@@ -6,10 +6,8 @@ import { useMovies } from '../context/MovieContext.tsx';
 
 const Home: React.FC = () => {
   const { 
-    myList, 
     categories,
-    allMovies,
-    refreshMovies
+    allMovies
   } = useMovies();
 
   return (
