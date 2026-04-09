@@ -7,8 +7,8 @@ default_platform(:ios)
 platform :ios do
   desc "Build an unsigned IPA for Sideloading (AltStore/Sideloadly)"
   lane :build_unsigned do
-    # This must run inside the ios/App directory where the workspace is located
-    Dir.chdir("ios/App") do
+    # Correct path relative to the fastlane folder
+    Dir.chdir("../ios/App") do
       # 1. Build the .app directly using xcodebuild with no signing
       sh(
         "xcodebuild -workspace App.xcworkspace " \
