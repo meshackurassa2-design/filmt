@@ -17,14 +17,16 @@ const Row: React.FC<RowProps> = ({ title, movies, variant = 'poster' }) => {
 
   return (
     <div className="relative mb-12 group/row font-sans">
-      <div className="flex items-center justify-between mb-5 md:mb-8 px-2">
-        <h2 className="text-lg md:text-2xl font-black uppercase tracking-[0.05em] text-white/95 group-hover:text-primary transition-colors duration-500">
+      <div className="flex items-center justify-between mb-4 md:mb-6 px-4">
+        <h2 className="text-xl md:text-3xl font-bold text-white tracking-tight">
           {title}
         </h2>
         
-        <button className="flex items-center gap-1.5 text-[9px] md:text-xs font-black text-zinc-600 hover:text-white transition-all uppercase tracking-[0.25em] hover:translate-x-1">
-            See all
-            <Play className="w-2.5 h-2.5 fill-current ml-0.5" />
+        <button className="flex items-center gap-1 text-zinc-500 hover:text-white transition-colors group/all">
+            <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest group-hover:mr-1 transition-all">All</span>
+            <div className="w-5 h-5 rounded-full bg-white/5 flex items-center justify-center">
+                <Play className="w-2.5 h-2.5 fill-current ml-0.5" />
+            </div>
         </button>
       </div>
 
