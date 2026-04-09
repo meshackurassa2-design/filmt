@@ -11,7 +11,7 @@ if (!rootElement) {
 }
 
 // Global error handler for native debugging
-window.onerror = function(message, source, lineno, colno, error) {
+window.onerror = function(message, source, lineno, _colno, _error) {
   console.error("BOOT_ERROR:", message, "at", source, ":", lineno);
   // We don't want to show an alert to users, but we can log for console access
   return false;
