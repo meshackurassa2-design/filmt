@@ -11,7 +11,7 @@ platform :ios do
     Dir.chdir("../ios/App") do
       # 1. Build the .app directly using xcodebuild with no signing
       sh(
-        "xcodebuild -workspace App.xcworkspace " \
+        "xcodebuild clean build -workspace App.xcworkspace " \
         "-scheme App " \
         "-configuration Debug " \
         "-sdk iphoneos " \

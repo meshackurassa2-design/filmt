@@ -42,26 +42,31 @@ const Hero: React.FC = () => {
                         if (!isCenter && !isPrev && !isNext) return null;
 
                         let x = 0;
-                        if (isPrev) x = -130;
-                        if (isNext) x = 130;
+                        let scale = isCenter ? 1 : 0.72;
+                        let zIndex = isCenter ? 30 : 10;
+                        let opacity = isCenter ? 1 : 0.35;
+                        let blur = isCenter ? 0 : 5;
+
+                        if (isPrev) x = -105; // Slightly tighter for mobile
+                        if (isNext) x = 105;
 
                         return (
                             <motion.div
                                 key={movie.id}
                                 onClick={() => isCenter ? handlePlay(movie.id) : setCurrentIndex(index)}
-                                className={`absolute rounded-[40px] overflow-hidden cursor-pointer shadow-[0_20px_50px_rgba(0,0,0,0.6)] border border-white/5`}
+                                className={`absolute rounded-[32px] overflow-hidden cursor-pointer shadow-[0_25px_60px_rgba(0,0,0,0.8)] border border-white/10`}
                                 initial={false}
                                 animate={{
                                     x: x,
-                                    scale: isCenter ? 1 : 0.75,
-                                    zIndex: isCenter ? 30 : 10,
-                                    opacity: isCenter ? 1 : 0.4,
-                                    filter: isCenter ? 'blur(0px)' : 'blur(4px)',
+                                    scale: scale,
+                                    zIndex: zIndex,
+                                    opacity: opacity,
+                                    filter: `blur(${blur}px)`,
                                 }}
-                                transition={{ type: 'spring', stiffness: 260, damping: 25 }}
+                                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                                 style={{ 
-                                    width: '230px', 
-                                    height: '320px',
+                                    width: '210px', // Slightly smaller for better screen fit
+                                    height: '300px',
                                     transformOrigin: 'center center'
                                 }}
                             >
@@ -70,8 +75,10 @@ const Hero: React.FC = () => {
                                     alt={movie.title} 
                                     className="w-full h-full object-cover"
                                 />
-                                {isCenter && (
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                                {isCenter ? (
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+                                ) : (
+                                    <div className="absolute inset-0 bg-black/40" />
                                 )}
                             </motion.div>
                         );
