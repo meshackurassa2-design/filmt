@@ -29,23 +29,13 @@ const MobileHeader: React.FC = () => {
             {/* Top Black Gradient for Immersive Fullscreen */}
             <div className="absolute inset-0 h-24 bg-gradient-to-b from-black via-black/80 to-transparent pointer-events-none" />
 
-            <div className="relative pt-[env(safe-area-inset-top)] px-6 flex justify-between items-start pointer-events-auto">
-                <div className="pt-3">
-                    <button className="text-white/60 hover:text-white transition-opacity active:scale-95 z-50">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 7H14M4 12H20M4 17H10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                        </svg>
-                    </button>
-                </div>
-                
+            <div className="relative pt-[env(safe-area-inset-top)] px-6 flex justify-center items-start pointer-events-auto">
                 {/* Center Notch for FT */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 pt-[env(safe-area-inset-top)] flex justify-center w-full">
+                <div className="relative pt-[env(safe-area-inset-top)] flex justify-center w-full">
                     <div className="bg-black/80 backdrop-blur-2xl px-10 pb-4 pt-1.5 rounded-b-[38px] border-b border-x border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.8)] flex items-center justify-center">
                         <span className="text-[#FFB800] text-xl font-black italic tracking-tighter drop-shadow-[0_0_10px_rgba(255,184,0,0.6)]">FT</span>
                     </div>
                 </div>
-
-                <div className="w-6 h-6"></div> {/* Spacer to balance flex layout */}
             </div>
         </div>
     );
