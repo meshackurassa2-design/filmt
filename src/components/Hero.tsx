@@ -31,8 +31,8 @@ const Hero: React.FC = () => {
         <div className="relative w-full pt-10 pb-16 flex flex-col items-center bg-transparent overflow-hidden font-sans">
             
             {/* 1. Overlapping Cards Carousel */}
-            <div className="relative w-full h-[320px] md:h-[450px] flex items-center justify-center">
-                <div className="relative w-full h-full flex justify-center items-center">
+            <div className="relative w-full h-[340px] md:h-[450px] flex items-center justify-center pointer-events-none">
+                <div className="relative w-full h-full flex justify-center items-center pointer-events-auto">
                     {featuredMovies.map((movie, index) => {
                         const isCenter = index === currentIndex;
                         const isPrev = index === (currentIndex - 1 + featuredMovies.length) % featuredMovies.length;
@@ -44,10 +44,11 @@ const Hero: React.FC = () => {
                         let x = 0;
                         let scale = isCenter ? 1 : 0.72;
                         let zIndex = isCenter ? 30 : 10;
-                        let opacity = isCenter ? 1 : 0.35;
+                        let opacity = isCenter ? 1 : 0.4;
                         let blur = isCenter ? 0 : 5;
 
-                        if (isPrev) x = -105; // Slightly tighter for mobile
+                        // Offsets calculated relative to the center
+                        if (isPrev) x = -105;
                         if (isNext) x = 105;
 
                         return (
@@ -65,8 +66,9 @@ const Hero: React.FC = () => {
                                 }}
                                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                                 style={{ 
-                                    width: '210px', // Slightly smaller for better screen fit
+                                    width: '210px',
                                     height: '300px',
+                                    left: 'calc(50% - 105px)', // Precisely centered
                                     transformOrigin: 'center center'
                                 }}
                             >
@@ -76,9 +78,9 @@ const Hero: React.FC = () => {
                                     className="w-full h-full object-cover"
                                 />
                                 {isCenter ? (
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
                                 ) : (
-                                    <div className="absolute inset-0 bg-black/40" />
+                                    <div className="absolute inset-0 bg-black/50" />
                                 )}
                             </motion.div>
                         );

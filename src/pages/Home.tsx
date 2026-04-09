@@ -13,7 +13,7 @@ const Home: React.FC = () => {
   } = useMovies();
 
   return (
-    <div className="bg-black min-h-screen pt-[calc(env(safe-area-inset-top)+5rem)]">
+    <div className="bg-black min-h-screen pt-[calc(env(safe-area-inset-top)+2rem)] md:pt-[calc(env(safe-area-inset-top)+5rem)]">
       {/* Top Level Category Tabs */}
       <HeaderTabs />
 

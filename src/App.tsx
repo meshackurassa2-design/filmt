@@ -113,8 +113,12 @@ const AppContent: React.FC = () => {
             <BackButtonHandler />
             <StatusBarHandler />
             
-            <Navbar />
-            <MobileHeader />
+            <div className="hidden lg:block">
+                <Navbar />
+            </div>
+            <div className="block lg:hidden">
+                <MobileHeader />
+            </div>
             <div className="flex flex-col min-h-screen border-t-[0px] border-transparent pt-0">
                 <main className="flex-grow">
                     <Routes>
