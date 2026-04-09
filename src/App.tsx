@@ -76,20 +76,32 @@ const AppContent: React.FC = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
-                <div className="flex flex-col items-center gap-6 animate-pulse">
-                    <div className="flex flex-col items-center">
-                        <h1 className="text-4xl font-black italic tracking-tighter text-[#FFB800] leading-none">
+            <div className="min-h-screen bg-[#0a0a0c] flex flex-col items-center justify-center p-4">
+                <div className="flex flex-col items-center gap-8">
+                    {/* Brand Section */}
+                    <div className="flex flex-col items-center animate-pulse">
+                        <h1 className="text-5xl font-black italic tracking-tighter text-[#FFB800] leading-none drop-shadow-[0_0_20px_rgba(255,184,0,0.4)]">
                             FILAMU
                         </h1>
-                        <h1 className="text-4xl font-black italic tracking-tighter text-white leading-none">
+                        <h1 className="text-5xl font-black italic tracking-tighter text-white leading-none">
                             TIMES
                         </h1>
                     </div>
-                    <div className="w-10 h-10 border-4 border-[#FFB800] border-t-transparent rounded-full animate-spin shadow-[0_0_15px_rgba(255,184,0,0.3)]" />
-                    <div className="flex flex-col items-center gap-1">
-                        <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.3em]">Connecting to Filamu</p>
-                        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent via-[#FFB800] to-transparent opacity-50" />
+                    
+                    {/* Animated Loader */}
+                    <div className="relative">
+                        <div className="w-14 h-14 border-4 border-white/5 border-t-[#FFB800] rounded-full animate-spin" />
+                        <div className="absolute inset-0 w-14 h-14 border-4 border-[#FFB800]/20 rounded-full blur-sm" />
+                    </div>
+
+                    {/* Diagnostic Text */}
+                    <div className="flex flex-col items-center gap-2">
+                        <p className="text-[#FFB800] text-[11px] font-black uppercase tracking-[0.4em] animate-pulse">
+                            Initializing Systems
+                        </p>
+                        <p className="text-gray-600 text-[10px] font-medium tracking-wider">
+                            Checking connection & assets...
+                        </p>
                     </div>
                 </div>
             </div>
